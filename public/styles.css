@@ -8,7 +8,7 @@ body {
 }
 
 .container-card {
-  width: 400px;
+  width: 100%;
   display: grid;
   place-items: center;
   grid-template-columns: repeat(2, 1fr);
@@ -54,6 +54,19 @@ body {
   display: flex;
   justify-content: space-between;
 }
+
+.btnLoad {
+  width: 100px;
+  justify-self: center;
+}
+
+.info-container {
+  text-align: center;
+}
+
+/* .inactive {
+  display: none;
+} */
 
 @keyframes fade {
   from {
