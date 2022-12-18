@@ -1,31 +1,43 @@
 const $app = document.getElementById('app');
 const $observe = document.getElementById('observe');
-const API = 'https://api.escuelajs.co/api/v1/products';
+const API = 'https://api.escuelajs.co/api/v1/';
 
-const getData = api => {
-  fetch(api)
-    .then(response => response.json())
-    .then(response => {
-      let products = response;
-      let output = products.map(product => {
-        // template
-      });
-      let newItem = document.createElement('section');
-      newItem.classList.add('Item');
-      newItem.innerHTML = output;
-      $app.appendChild(newItem);
-    })
-    .catch(error => console.log(error));
-}
+/* === Endpoints === */
+const endpoint_PRODUCTS = "products";
 
-const loadData = () => {
-  getData(API);
-}
+/* Query parameters */
+const qp_PAGINACIÓN = "?offset=5&limit=10";
 
-const intersectionObserver = new IntersectionObserver(entries => {
-  // logic...
-}, {
-  rootMargin: '0px 0px 100% 0px',
+const api = axios.create({
+  baseURL: API,
+  headers: {
+    "Content-Type": "application/json;charset=utf-8",
+  },
 });
 
-intersectionObserver.observe($observe);
+async function getProducts() {
+  const products = await api(endpoint_PRODUCTS + "?offset=5&limit=10");
+  const arrayProducts = products.data;
+  console.log(arrayProducts);
+  arrayProducts.forEach(product => {
+    const productContainer = document.createElement("article");
+    productContainer.classList.add("Card");
+
+    const productImg = document.createElement("img");
+    productImg.setAttribute("alt", product.category.description);
+    productImg.setAttribute("src", product.category.image);
+    
+    const productTitle = document.createElement("h2");
+    productTitle.innerHTML = product.category.name;
+    
+    const productPrice = document.createElement("small");
+    productPrice.innerHTML = product.price;
+  
+    productTitle.appendChild(productPrice);
+    productContainer.appendChild(productImg);
+    productContainer.appendChild(productTitle);
+    $app.appendChild(productContainer);
+  });
+}
+
+getProducts();

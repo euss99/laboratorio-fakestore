@@ -7,6 +7,14 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+.container-card {
+  width: 400px;
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+}
+
 .Main {
   padding: 10px;
   grid-template-columns: minmax(auto, 768px);
@@ -22,6 +30,7 @@ body {
 }
 
 .Card {
+  width: 350px;
   text-decoration: none;
   box-shadow: 8px 14px 38px rgba(39, 44, 49, 0.06),
     1px 3px 8px rgba(39, 44, 49, 0.03);
@@ -54,3 +63,4 @@ body {
     opacity: 1;
   }
 }
+
